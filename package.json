@@ -1,0 +1,21 @@
+{
+  "name": "weatherly",
+  "version": "1.0.0",
+  "description": "A responsive web application that fetches and displays real-time weather data using OpenWeatherMap API.",
+  "main": "src/js/app.js",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build process can be defined here'",
+    "test": "echo 'No tests defined'"
+  },
+  "keywords": [
+    "weather",
+    "API",
+    "responsive",
+    "JavaScript"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
+}
