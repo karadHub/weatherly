@@ -5,7 +5,7 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: 'Inter', Arial, sans-serif;
-    background: linear-gradient(120deg, #00A9FF, #f8fafc, #c2d360, #e0e7ff);
+    background: linear-gradient(120deg, #00A9FF, #f8fafc, #6b540e, #e0e7ff);
     background-size: 300% 300%;
     animation: gradientMove 6s ease-in-out infinite;
     display: flex;

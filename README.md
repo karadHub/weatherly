@@ -25,7 +25,7 @@ Weatherly is a visually engaging, responsive web application that fetches and di
 3. Open `src/index.html` in your web browser to view the application locally.
 
 ## Demo
-Live demo can be accessed at: [Your Live Demo Link Here]
+Live demo can be accessed at: [[Weatherly](https://karadhub.github.io/weatherly/)]
 
 ## Credits
 - API Provider: [OpenWeatherMap](https://openweathermap.org/)
