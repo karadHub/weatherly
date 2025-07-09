@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const { main, weather, wind } = data;
         weatherCard.innerHTML = `
             <h2>${data.name}</h2>
-            <img class="weather-anim" src="assets/icons/${weather[0].icon}.png" alt="${weather[0].description}" onerror="this.onerror=null;this.src='weatherly/src/assets/icons/04n.png';">
+            <img class="weather-anim" src="assets/icons/${weather[0].icon}.png" alt="${weather[0].description}" onerror="this.onerror=null;this.src='main/src/assets/icons/04n.png';">
             <div style="display:flex;gap:1.2rem;justify-content:center;margin:0.5rem 0;">
                 <div>
                     <p style="font-weight:600;font-size:1.2rem;">${Math.round(main.temp)}°C</p>
