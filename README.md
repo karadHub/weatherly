@@ -16,7 +16,7 @@ Weatherly is a visually engaging, responsive web application that fetches and di
 ## Installation
 1. Clone the repository:
    ```
-   git clone https://github.com/vaibhav-karad/weatherly.git
+   git clone https://github.com/karadhub/weatherly.git
    ```
 2. Navigate to the project directory:
    ```
