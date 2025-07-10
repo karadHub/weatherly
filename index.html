@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weatherly - Real-Time Weather Monitoring</title>
+    <link rel="icon" href="src/assets/icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="src/css/style.css">
 </head>
 <body>
@@ -11,7 +12,7 @@
         <div class="preload-spinner"></div>
     </div>
     <div class="container">
-        <h1>Weatherly</h1>
+        <h1>Weatherly🌤️ </h1>
         <div class="search">
             <input type="text" id="city-input" placeholder="Enter city name" />
             <button id="search-button">Search</button>
@@ -28,10 +29,15 @@
                 <p id="weather-condition"></p>
             </div>
         </div>
-        <div id="refresh-indicator" class="refresh-indicator">Auto-refreshing every 10 minutes...</div>
-        <button id="copyright-btn" class="copyright-btn" title="Copyright © 2025 Vaibhav. All rights reserved.">
-            &copy; 2025 Vaibhav Karad
-        </button>
+        <a href="https://karadhub.github.io/" target="_blank" style="text-decoration: none; color: inherit;">
+            <div id="refresh-indicator" class="refresh-indicator">
+                Auto-refreshing every 10 minutes...
+            </div>
+            <button id="copyright-btn" class="copyright-btn" title="Copyright">
+               © karadhub.github.io Inc. All rights reserved.
+            </button>
+        </a>
+
     </div>
     <script>
         // Hide preload overlay when DOM is ready
