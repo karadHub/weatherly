@@ -1,3 +1,93 @@
+/* Animated weather background container */
+#animated-bg {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    opacity: 0.85;
+    transition: opacity 0.7s;
+}
+
+/* Modern weather card tweaks */
+.weather-card {
+    background: rgba(255,255,255,0.55);
+    border-radius: 2.2rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.weather-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.weather-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #22223b;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.weather-card .weather-anim {
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0 4px 16px #00A9FF33);
+    animation: popIn 0.7s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.7) rotate(-10deg); opacity: 0; }
+    60% { transform: scale(1.1) rotate(3deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.temp-main {
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+.feels-like {
+    display: block;
+    font-size: 1.05rem;
+    color: #888;
+    margin-top: 0.2rem;
+}
+
+@media (max-width: 600px) {
+    #animated-bg {
+        opacity: 0.7;
+    }
+    .weather-card {
+        padding: 1.1rem 0.5rem;
+        border-radius: 1.1rem;
+    }
+    .weather-card .weather-anim {
+        width: 38px;
+        height: 38px;
+    }
+    .temp-main {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+}
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -5,7 +95,7 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: 'Inter', Arial, sans-serif;
-    background: linear-gradient(120deg, #00A9FF, #f8fafc, #0e1e6b, #e0e7ff);
+    background: linear-gradient(120deg, #00A9FF, #f8fafc 40%, #0e1e6b 80%, #e0e7ff 100%);
     background-size: 300% 300%;
     animation: gradientMove 6s ease-in-out infinite;
     display: flex;
@@ -27,11 +117,11 @@ body {
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  backdrop-filter: blur(18px) saturate(120%);
   padding: 2rem;
   max-width: 420px;
   width: 90%;
@@ -65,14 +155,15 @@ h1 {
     border-radius: 2rem;
     font-size: 1.1rem;
     background: rgba(240, 240, 255, 0.7);
-    box-shadow: 0 2px 8px rgba(0, 169, 255, 0.07);
+    box-shadow: 0 2px 8px rgba(0, 169, 255, 0.07), 0 0 0 0px #00A9FF00;
     transition: box-shadow 0.2s, background 0.2s;
     outline: none;
 }
 
 #city-input:focus {
     background: #fff;
-    box-shadow: 0 4px 16px rgba(0, 169, 255, 0.18);
+    box-shadow: 0 4px 16px rgba(0, 169, 255, 0.18), 0 0 0 2px #00A9FF44;
+    transition: box-shadow 0.2s, background 0.2s;
 }
 
 #search-button {
@@ -108,9 +199,11 @@ h1 {
 .weather-card {
     width: 100%;
     min-height: 180px;
-    background: rgba(255,255,255,0.85);
-    border-radius: 1.5rem;
-    box-shadow: 0 4px 24px rgba(0, 169, 255, 0.08);
+    background: rgba(255,255,255,0.65);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
     padding: 1.5rem 1.2rem 1.2rem 1.2rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -120,7 +213,7 @@ h1 {
     gap: 0.5rem;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s cubic-bezier(.4,0,.2,1), transform 0.5s cubic-bezier(.4,0,.2,1);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
 }
 
 .weather-card.loaded {
@@ -138,10 +231,18 @@ h1 {
 
 .weather-card img,
 .weather-card .weather-anim {
-    width: 72px;
-    height: 72px;
+    width: 80px;
+    height: 80px;
     margin: 0.5rem 0;
     display: block;
+    filter: drop-shadow(0 4px 16px #00A9FF33);
+    animation: popIn 0.7s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.7) rotate(-10deg); opacity: 0; }
+    60% { transform: scale(1.1) rotate(3deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
 }
 
 .weather-card p {
@@ -159,6 +260,13 @@ h1 {
     margin-bottom: 0.5rem;
     font-weight: 600;
     letter-spacing: 0.5px;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
 .error {
@@ -261,9 +369,11 @@ h1 {
     .container {
         padding: 1.2rem 0.5rem 1.5rem 0.5rem;
         max-width: 98vw;
+        border-radius: 12px;
     }
     .weather-card {
         padding: 1rem 0.5rem;
+        border-radius: 1.1rem;
     }
     .search {
         flex-direction: column;
@@ -271,5 +381,9 @@ h1 {
     }
     #search-button {
         width: 100%;
+    }
+    .weather-card img, .weather-card .weather-anim {
+        width: 64px;
+        height: 64px;
     }
 }
