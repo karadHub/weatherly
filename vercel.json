@@ -1,11 +1,4 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "functions": {
-    "api/weather.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]
