@@ -5,6 +5,7 @@
   "main": "src/js/app.js",
   "scripts": {
     "start": "live-server src",
+    "dev": "vercel dev",
     "build": "echo 'Build process can be defined here'",
     "test": "echo 'No tests defined'"
   },
@@ -17,10 +18,9 @@
   "license": "MIT",
   "dependencies": {
     "live-server": "^1.2.1"
+  },
+  "devDependencies": {
+    "vercel": "^39.0.0"
   }
-{
-  "scripts": {
-    "build": "[my-framework] build --output public"
-  }
-}
+
 }
