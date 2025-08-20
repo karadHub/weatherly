@@ -1,3 +1,6 @@
+import { fetchWeatherData } from './api.js';
+import { getWeatherBackgroundSVG } from './weatherBackgrounds.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const loadingIndicator = document.getElementById('loading');
     const searchButton = document.getElementById('search-button');
@@ -18,19 +21,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const updateDOM = (data) => {
-        const { main, weather, wind } = data;
+        const { main, weather, wind, sys } = data;
+        // Animated background SVG
+        const bgSVG = getWeatherBackgroundSVG(weather[0].main);
+        document.body.style.backgroundImage = `url('')`;
+        let bgDiv = document.getElementById('animated-bg');
+        if (!bgDiv) {
+            bgDiv = document.createElement('div');
+            bgDiv.id = 'animated-bg';
+            bgDiv.style.position = 'fixed';
+            bgDiv.style.zIndex = '-1';
+            bgDiv.style.top = '0';
+            bgDiv.style.left = '0';
+            bgDiv.style.width = '100vw';
+            bgDiv.style.height = '100vh';
+            bgDiv.style.overflow = 'hidden';
+            document.body.prepend(bgDiv);
+        }
+        bgDiv.innerHTML = bgSVG;
+
+        // Weather icon (animated if available)
+        const iconUrl = `assets/icons/${weather[0].icon}.png`;
+        // Weather details
+        const feelsLike = main.feels_like ? `<span class="feels-like">Feels like: ${Math.round(main.feels_like)}°C</span>` : '';
+        const sunrise = sys && sys.sunrise ? new Date(sys.sunrise * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+        const sunset = sys && sys.sunset ? new Date(sys.sunset * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
         weatherCard.innerHTML = `
-            <h2>${data.name}</h2>
-            <img class="weather-anim" src="assets/icons/${weather[0].icon}.png" alt="${weather[0].description}" onerror="this.onerror=null;this.src='src/assets/icons/04n.png';">
-            <div style="display:flex;gap:1.2rem;justify-content:center;margin:0.5rem 0;">
-                <div>
-                    <p style="font-weight:600;font-size:1.2rem;">${Math.round(main.temp)}°C</p>
-                    <p style="font-size:0.95rem;color:#00A9FF;">${weather[0].main}</p>
+            <h2 style="display:flex;align-items:center;gap:0.5rem;justify-content:center;">
+                <span>${data.name}</span>
+                <img class="weather-anim" src="${iconUrl}" alt="${weather[0].description}" style="width:48px;height:48px;"/>
+            </h2>
+            <div class="temp-main" style="display:flex;align-items:center;justify-content:center;gap:1.2rem;">
+                <div style="text-align:center;">
+                    <span style="font-size:2.2rem;font-weight:700;">${Math.round(main.temp)}°C</span>
+                    <div style="font-size:1.1rem;color:#00A9FF;font-weight:600;">${weather[0].main}</div>
+                    ${feelsLike}
                 </div>
-                <div>
-                    <p style="margin:0;">💧 ${main.humidity}%</p>
-                    <p style="margin:0;">💨 ${wind.speed} m/s</p>
+                <div style="font-size:1.1rem;">
+                    <div>💧 <b>${main.humidity}%</b> <span style="color:#888;font-size:0.95em;">Humidity</span></div>
+                    <div>� <b>${wind.speed} m/s</b> <span style="color:#888;font-size:0.95em;">Wind</span></div>
                 </div>
+            </div>
+            <div style="margin-top:0.7rem;display:flex;gap:1.5rem;justify-content:center;">
+                <div>🌅 <span style="font-weight:500;">${sunrise}</span> <span style="color:#888;font-size:0.95em;">Sunrise</span></div>
+                <div>🌇 <span style="font-weight:500;">${sunset}</span> <span style="color:#888;font-size:0.95em;">Sunset</span></div>
+            </div>
+            <div style="margin-top:0.7rem;font-size:1.1rem;color:#22223b;font-weight:500;letter-spacing:0.1px;">
+                <span style="vertical-align:middle;">${weather[0].description}</span>
             </div>
         `;
         animateCard();

@@ -1,5 +1,7 @@
+import { API_KEY } from './config.js';
+
 function fetchWeatherData(city) {
-    const apiKey = '8f4d6eb2a96e394e59a0dffb363514f0'; // OpenWeatherMap API key
+    const apiKey = API_KEY;
     const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     return fetch(endpoint)
@@ -14,3 +16,5 @@ function fetchWeatherData(city) {
             throw error;
         });
 }
+
+export { fetchWeatherData };
